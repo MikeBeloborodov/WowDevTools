@@ -1,5 +1,5 @@
 ## Interface: 11200
-## Title: Dev Tools
+## Title: WoW Dev Tools
 ## Notes: Developement tools for addos.
 ## Author: MikeBeloborodov
-Dev Tools.xml
+WowDevTools.xml
