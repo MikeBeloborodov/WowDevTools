@@ -62,3 +62,22 @@ SlashCmdList["WIDGETS"] = function (msg)
 		getWidgetsFrame:RegisterEvent("SPELLCAST_FAILED")
 	end
 end
+
+-- Frame to subscribe events to
+local eventsTestFrame = CreateFrame("Frame")
+eventsTestFrame:SetScript("OnEvent",
+	function()
+		local args = {arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9}
+		PrintRed("Event: " .. event)
+		for i, v in pairs(args) do
+			if (v) then
+				PrintWhite("Arg" .. i .. ": " .. v)
+			end
+		end
+	end
+)
+
+SLASH_ETEST1 = "/etest"
+SlashCmdList["ETEST"] = function (msg)
+	eventsTestFrame:RegisterEvent(msg)
+end

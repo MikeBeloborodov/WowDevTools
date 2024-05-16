@@ -14,3 +14,5 @@ Vanilla 1.12.1 addon for World of Warcraft with various slash commands that help
 * **/events** Shows all events that are being triggered by the client in the chat.
 
 * **/widgets** Move your mouse to the widget that you want to know the name of and use any spell (the cast should fail) and you'll get this widget's name in the chat.
+
+* **/etest $EVENT_NAME** Registers an event to a test frame and shows its arguments in the chat.
