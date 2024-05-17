@@ -1,5 +1,6 @@
 ## Interface: 11200
 ## Title: WoW Dev Tools
 ## Notes: Developement tools for addos.
+## SavedVariables: SeenEvents
 ## Author: MikeBeloborodov
 WowDevTools.xml

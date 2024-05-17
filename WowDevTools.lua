@@ -22,11 +22,21 @@ end
 -- All events
 
 local eventsFrame = CreateFrame('Frame')
-eventsFrame:UnregisterAllEvents()
-eventsFrame.IsOn = false
+eventsFrame:RegisterAllEvents()
+eventsFrame.IsOn = true
+function eventsFrame:HasBeenSeen(event)
+	for k, v in pairs(SeenEvents) do
+		if (v == event) then
+			return true
+		end
+	end
+	return false
+end
 eventsFrame:SetScript('OnEvent',
     function()
-		PrintWhite(event)
+		if not eventsFrame:HasBeenSeen(event) then
+			PrintWhite(event)
+		end
     end
 )
 
@@ -65,6 +75,7 @@ end
 
 -- Frame to subscribe events to
 local eventsTestFrame = CreateFrame("Frame")
+-- eventsTestFrame:RegisterEvent("UPDATE_PENDING_MAIL")
 eventsTestFrame:SetScript("OnEvent",
 	function()
 		local args = {arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9}
@@ -80,4 +91,22 @@ eventsTestFrame:SetScript("OnEvent",
 SLASH_ETEST1 = "/etest"
 SlashCmdList["ETEST"] = function (msg)
 	eventsTestFrame:RegisterEvent(msg)
+end
+
+local uniqueEventsFrame = CreateFrame("Frame")
+uniqueEventsFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+uniqueEventsFrame:SetScript("OnEvent",
+	function()
+		local defaultEvents = {}
+		if SeenEvents then
+			defaultEvents = SeenEvents
+		else
+			SeenEvents = defaultEvents
+		end
+	end
+)
+
+SLASH_AEVENT1 = "/aevent"
+SlashCmdList["AEVENT"] = function(msg)
+	SeenEvents[table.getn(SeenEvents) + 1] = msg
 end
